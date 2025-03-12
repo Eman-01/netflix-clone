@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase';
-import { ToastContainer } from 'react-toastify';
+import React, { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { ToastContainer } from "react-toastify";
 
-import Home from './pages/Home/Home';
-import Login from './pages/Login/Login';
-import Player from './pages/Player/Player';
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Player from "./pages/Player/Player";
 
 const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user && window.location.pathname === '/login') {
-        navigate('/');
-      } else if (!user && window.location.pathname !== '/login') {
-        navigate('/login');
+      if (user && window.location.pathname === "/login") {
+        navigate("/");
+      } else if (!user && window.location.pathname !== "/login") {
+        navigate("/login");
       }
     });
 
-    return () => unsubscribe(); // ✅ Cleanup to prevent memory leaks
-  }, [navigate]); // ✅ Add `navigate` to the dependency array
+    return () => unsubscribe();
+  }, [navigate]);
 
   return (
     <div>
